@@ -86,8 +86,9 @@ export default function App() {
   const [fontStatus, setFontStatus] = useState(null); // which fonts the renderer really has
 
   useEffect(() => {
-    api.presets().then(setPresets).catch(() =>
-      setError("Can't reach the AutoCut server. Start it with: uvicorn app.main:app --port 8000"));
+    api.presets().then(setPresets).catch(() => {
+      setPresets(null);
+      });
   }, []);
 
   // Re-check installed fonts whenever the Font tab opens (picks up newly added files).
