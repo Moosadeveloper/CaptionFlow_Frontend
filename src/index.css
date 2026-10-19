@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Anton&family=Archivo+Black&family=Bangers&family=Bebas+Neue&family=Caveat:wght@400..700&family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;600;700&family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Inter:wght@400;600;800&family=Lato:wght@400;700;900&family=League+Spartan:wght@400;600;800&family=Lobster&family=Manrope:wght@400;600;800&family=Montserrat:wght@400;600;800;900&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;800&family=Nunito:wght@400;600;800&family=Orbitron:wght@400;600;800&family=Oswald:wght@400;600;700&family=Outfit:wght@400;600;800&family=Pacifico&family=Playfair+Display:wght@400;600;800&family=Poppins:wght@400;600;800&family=Raleway:wght@400;600;800&family=Righteous&family=Roboto:wght@400;700;900&family=Sora:wght@400;600;800&family=Space+Grotesk:wght@400;600;700&family=Urbanist:wght@400;600;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Headings use Archivo's wide cut; body stays at normal width. */
+.display { font-stretch: 118%; font-weight: 800; letter-spacing: -0.01em; }
+
+:focus-visible { outline: 3px solid #E0312B; outline-offset: 2px; }
+
+/* ---------- caption looks (mirror backend/pipeline/presets.py) ---------- */
+.cap { font-weight: 800; line-height: 1.15; text-align: center; }
+.cap-bold_white   { color: #fff; -webkit-text-stroke: 0.07em #000; paint-order: stroke fill; text-shadow: 0 0.03em 0 #000; text-transform: uppercase; }
+.cap-yellow_punch { color: #FFE14D; -webkit-text-stroke: 0.08em #111; paint-order: stroke fill; text-transform: uppercase; }
+.cap-boxed        { color: #111; background: #fff; padding: 0.08em 0.3em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.cap-clean        { color: #fff; font-weight: 700; text-shadow: 0 0.04em 0.12em rgba(0,0,0,.8); }
+.cap-neon         { color: #fff; text-transform: uppercase; text-shadow: 0 0 0.12em #FF2FD6, 0 0 0.35em #FF2FD6, 0 0 0.7em #FF2FD6; }
+
+.cap-bold_white .emph   { color: #FFD23F; }
+.cap-yellow_punch .emph { color: #FF4D4D; }
+.cap-boxed .emph        { color: #E0312B; }
+.cap-clean .emph        { color: #9EE7FF; }
+
+.cap .w { display: inline-block; margin: 0 0.12em; }
+.cap .w.pending { visibility: hidden; }
+
+/* ---------- animations: applied to a word the moment it is spoken ---------- */
+@keyframes pop     { 0% { transform: scale(.4); } 60% { transform: scale(1.1); } 100% { transform: scale(1); } }
+@keyframes bounce  { 0% { transform: scale(1.2,.3); } 35% { transform: scale(.9,1.25) translateY(-.15em); } 70% { transform: scale(1.08,.88); } 100% { transform: none; } }
+@keyframes slideup { from { transform: translateY(.6em); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes fadein  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes shake   { 0%,100% { transform: none; } 20% { transform: rotate(5deg); color: #0ff; } 40% { transform: rotate(-5deg); color: #f00; } 60% { transform: rotate(4deg); } 80% { transform: rotate(-3deg); } }
+@keyframes type    { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+.anim-pop_in   .w.live   { animation: pop .2s ease-out both; }
+.anim-bounce   .w.live   { animation: bounce .26s ease-out both; }
+.anim-typewriter .w.live { animation: type .25s steps(8) both; }
+.anim-glitch   .w.live.emph { animation: shake .28s linear both; }
+.anim-slide_up           { animation: slideup .2s ease-out both; }
+.anim-fade, .anim-neon   { animation: fadein .22s ease-out both; }
+.anim-karaoke .w         { opacity: .75; }
+.anim-karaoke .w.speaking { opacity: 1; color: #FFD23F; }
+
+/* Thumbnails loop the same keyframes so each preset shows its motion. */
+.thumb .w { animation-iteration-count: infinite !important; animation-duration: 1.6s !important; }
+.thumb.anim-slide_up, .thumb.anim-fade, .thumb.anim-neon { animation-iteration-count: infinite; animation-duration: 1.6s; }
+.thumb.anim-karaoke .w:nth-child(2) { opacity: 1; color: #FFD23F; }
+
+/* tally light pulse while processing */
+@keyframes tally { 50% { opacity: .35; } }
+.tally-live { animation: tally 1.2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- creator caption looks ---------- */
+.cap-ali_clean { color:#fff; -webkit-text-stroke:.055em #111; paint-order:stroke fill; text-transform:uppercase; text-shadow:0 .05em .12em rgba(0,0,0,.75); }
+.cap-ali_clean .emph { color:#C6FF24; }
+.cap-creator_blue { color:#fff; -webkit-text-stroke:.055em #050505; paint-order:stroke fill; text-transform:uppercase; text-shadow:0 .05em .13em rgba(0,0,0,.8); }
+.cap-creator_blue .emph { color:#2E73FF; }
+.cap-deven_jatho { color:#E9EDF5; -webkit-text-stroke:.045em #111; paint-order:stroke fill; text-transform:uppercase; text-shadow:0 0 .18em rgba(0,183,255,.5); }
+.cap-deven_jatho .emph { color:#00C6FF; }
+.cap-apple_clean { color:#fff; font-weight:700; text-shadow:0 .04em .12em rgba(0,0,0,.6); }
+.cap-apple_clean .emph { color:#A9FFB2; }
+.cap-shadow_text { color:#FFE400; text-shadow:.05em .07em 0 #3a3000, 0 0 .22em rgba(255,228,0,.42); }
+.cap-shadow_text .emph { color:#fff; }
+.cap-metallic { color:#ececec; -webkit-text-stroke:.035em #454545; paint-order:stroke fill; text-shadow:0 .08em .12em rgba(0,0,0,.65); }
+.cap-metallic .emph { color:#fff; }
+.cap-gradient_pop { color:#FFB000; text-shadow:0 0 .16em rgba(255,176,0,.35); }
+.cap-gradient_pop .emph { color:#FF36D8; }
+
+/* ---------- extended text animation library ---------- */
+@keyframes zeroGravity { 0%{transform:translateY(.5em) scale(.65);opacity:0} 45%{transform:translateY(-.24em) scale(1.14)} 70%{transform:translateY(.08em) scale(.95)} 100%{transform:none;opacity:1} }
+@keyframes stretchFx { 0%{transform:scale(.35,1.5);opacity:0} 65%{transform:scale(1.08,.94);opacity:1} 100%{transform:none;opacity:1} }
+@keyframes squashFx { 0%{transform:scale(1.55,.35);opacity:0} 65%{transform:scale(.94,1.08);opacity:1} 100%{transform:none;opacity:1} }
+@keyframes springFx { 0%{transform:scale(.25);opacity:0} 55%{transform:scale(1.2)} 75%{transform:scale(.93)} 100%{transform:none;opacity:1} }
+@keyframes twistFx { 0%{transform:rotate(22deg) scale(.65);opacity:0} 100%{transform:none;opacity:1} }
+@keyframes spinFx { 0%{transform:rotate(180deg) scale(.55);opacity:0} 100%{transform:none;opacity:1} }
+@keyframes tiltFx { 0%{transform:rotate(-12deg) translateY(.25em) scale(.7);opacity:0} 100%{transform:none;opacity:1} }
+@keyframes fisheyeFx { 0%{transform:scale(.5,1.4);opacity:0} 55%{transform:scale(1.25,.9)} 100%{transform:none;opacity:1} }
+@keyframes waveFx { 0%{transform:translateY(.25em) rotate(8deg);opacity:0} 60%{transform:translateY(-.12em) rotate(-4deg);opacity:1} 100%{transform:none;opacity:1} }
+@keyframes flashFx { 0%{transform:scale(1.35);filter:brightness(3);opacity:0} 100%{transform:none;filter:none;opacity:1} }
+@keyframes scaleInFx { 0%{transform:scale(.7);opacity:0} 100%{transform:none;opacity:1} }
+@keyframes scaleOutFx { 0%{transform:scale(1.2);opacity:.35} 100%{transform:none;opacity:1} }
+@keyframes leftInFx { from{transform:translateX(2.5em);opacity:0} to{transform:none;opacity:1} }
+@keyframes rightInFx { from{transform:translateX(-2.5em);opacity:0} to{transform:none;opacity:1} }
+@keyframes downInFx { from{transform:translateY(-.65em);opacity:0} to{transform:none;opacity:1} }
+@keyframes crossFx { from{transform:translate(-1.6em,.5em);opacity:0} to{transform:none;opacity:1} }
+@keyframes splitFx { from{letter-spacing:.55em;transform:scaleX(.65);opacity:0} to{letter-spacing:normal;transform:none;opacity:1} }
+@keyframes blurFx { from{filter:blur(.35em);opacity:0} to{filter:none;opacity:1} }
+@keyframes shineFx { 0%{filter:brightness(.75);text-shadow:none} 45%{filter:brightness(1.8);text-shadow:0 0 .35em #00C6FF} 100%{filter:none} }
+@keyframes rgbFx { 0%,100%{text-shadow:none} 30%{text-shadow:-.08em 0 #0ff,.08em 0 #f00} 60%{text-shadow:.06em 0 #0ff,-.06em 0 #f00} }
+@keyframes shadowRevealFx { from{text-shadow:.35em .35em .3em rgba(0,0,0,.9);opacity:0} to{text-shadow:.06em .08em .1em rgba(0,0,0,.65);opacity:1} }
+
+.anim-zero_gravity .w.live { animation:zeroGravity .36s cubic-bezier(.2,.9,.25,1.15) both; }
+.anim-stretch .w.live { animation:stretchFx .3s ease-out both; }
+.anim-squash .w.live { animation:squashFx .3s ease-out both; }
+.anim-spring .w.live { animation:springFx .36s ease-out both; }
+.anim-twist .w.live { animation:twistFx .28s ease-out both; }
+.anim-spin_in .w.live { animation:spinFx .32s ease-out both; }
+.anim-tilt_pop .w.live { animation:tiltFx .28s ease-out both; }
+.anim-fisheye .w.live { animation:fisheyeFx .3s ease-out both; }
+.anim-wave .w.live { animation:waveFx .3s ease-out both; }
+.anim-flash .w.live { animation:flashFx .22s ease-out both; }
+.anim-fade_words .w.live { animation:fadein .28s ease-out both; }
+.anim-trendy .w.live, .anim-ali_abdaal .w.live, .anim-impact .w.live { animation:pop .24s cubic-bezier(.2,.9,.25,1.2) both; }
+.anim-slide_down { animation:downInFx .25s ease-out both; }
+.anim-slide_left, .anim-wipe_left { animation:leftInFx .28s ease-out both; }
+.anim-slide_right, .anim-wipe_right { animation:rightInFx .28s ease-out both; }
+.anim-smooth_cross { animation:crossFx .3s ease-out both; }
+.anim-split_reveal { animation:splitFx .3s ease-out both; }
+.anim-mask_up { animation:slideup .25s ease-out both; overflow:hidden; }
+.anim-blur_in { animation:blurFx .3s ease-out both; }
+.anim-scale_in { animation:scaleInFx .25s ease-out both; }
+.anim-scale_out { animation:scaleOutFx .25s ease-out both; }
+.anim-shiny { animation:shineFx .75s ease-out both; }
+.anim-rgb_split { animation:rgbFx .35s linear both; }
+.anim-shadow_reveal { animation:shadowRevealFx .3s ease-out both; }
+
+.thumb.anim-slide_down,.thumb.anim-slide_left,.thumb.anim-slide_right,.thumb.anim-wipe_left,.thumb.anim-wipe_right,
+.thumb.anim-smooth_cross,.thumb.anim-split_reveal,.thumb.anim-mask_up,.thumb.anim-blur_in,.thumb.anim-scale_in,
+.thumb.anim-scale_out,.thumb.anim-shiny,.thumb.anim-rgb_split,.thumb.anim-shadow_reveal { animation-iteration-count:infinite!important; animation-duration:1.6s!important; }
+
+/* draggable caption ambient glow */
+.caption-drag-glow { display:none; }
+.caption-drag-glow.is-on { display:none; }
+
+/* extra creator animation templates */
+@keyframes elasticFx { 0%{transform:scale(.35);opacity:0} 45%{transform:scale(1.3,.78)} 68%{transform:scale(.9,1.14)} 85%{transform:scale(1.05,.96)} 100%{transform:none;opacity:1} }
+@keyframes zoomPunchFx { 0%{transform:scale(1.9);opacity:0;filter:blur(.1em)} 60%{transform:scale(.94);opacity:1;filter:none} 100%{transform:none} }
+@keyframes overshootFx { 0%{transform:translateY(.35em) scale(.7);opacity:0} 60%{transform:translateY(-.08em) scale(1.16)} 100%{transform:none;opacity:1} }
+@keyframes wobbleFx { 0%{transform:rotate(-13deg) scale(.8);opacity:0} 35%{transform:rotate(10deg) scale(1.08)} 65%{transform:rotate(-5deg)} 100%{transform:none;opacity:1} }
+@keyframes flipXFx { from{transform:rotateY(90deg);opacity:0} to{transform:none;opacity:1} }
+@keyframes flipYFx { from{transform:rotateX(90deg);opacity:0} to{transform:none;opacity:1} }
+@keyframes rubberFx { 0%{transform:scale(1.6,.45);opacity:0} 45%{transform:scale(.82,1.25);opacity:1} 70%{transform:scale(1.1,.9)} 100%{transform:none} }
+@keyframes dropWordFx { from{transform:translateY(-.8em) rotate(-5deg);opacity:0} 65%{transform:translateY(.08em)} to{transform:none;opacity:1} }
+@keyframes floatWordFx { from{transform:translateY(.55em) scale(.88);opacity:0} to{transform:none;opacity:1} }
+@keyframes trackingFx { from{letter-spacing:.5em;opacity:0;filter:blur(.12em)} to{letter-spacing:normal;opacity:1;filter:none} }
+@keyframes glowPulseFx { 0%{filter:brightness(.7);text-shadow:0 0 .08em currentColor} 50%{filter:brightness(1.7);text-shadow:0 0 .5em currentColor} 100%{filter:none} }
+@keyframes flickerFx { 0%,18%,22%,40%,44%,100%{opacity:1} 20%,42%{opacity:.25} 60%{opacity:.75} }
+@keyframes cinematicFx { from{opacity:0;filter:blur(.3em);transform:scale(1.08)} to{opacity:1;filter:none;transform:none} }
+
+.anim-elastic .w.live { animation:elasticFx .42s cubic-bezier(.2,.9,.2,1.15) both; }
+.anim-zoom_punch .w.live { animation:zoomPunchFx .3s ease-out both; }
+.anim-overshoot .w.live { animation:overshootFx .34s ease-out both; }
+.anim-wobble .w.live { animation:wobbleFx .4s ease-out both; }
+.anim-flip_x .w.live { animation:flipXFx .34s ease-out both; transform-style:preserve-3d; }
+.anim-flip_y .w.live { animation:flipYFx .34s ease-out both; transform-style:preserve-3d; }
+.anim-rubber .w.live { animation:rubberFx .38s ease-out both; }
+.anim-drop_word .w.live { animation:dropWordFx .34s ease-out both; }
+.anim-float_word .w.live { animation:floatWordFx .36s ease-out both; }
+.anim-word_swap .w.live { animation:zoomPunchFx .28s ease-out both; }
+.anim-glow_pulse { animation:glowPulseFx 1s ease-in-out both; }
+.anim-flicker { animation:flickerFx .7s linear both; }
+.anim-tracking_in { animation:trackingFx .42s ease-out both; }
+.anim-rise_blur { animation:blurFx .35s ease-out both, slideup .35s ease-out both; }
+.anim-cinematic { animation:cinematicFx .5s ease-out both; }
+.anim-soft_zoom { animation:scaleOutFx .42s ease-out both; }
+.thumb.anim-glow_pulse,.thumb.anim-flicker,.thumb.anim-tracking_in,.thumb.anim-rise_blur,.thumb.anim-cinematic,.thumb.anim-soft_zoom { animation-iteration-count:infinite!important; animation-duration:1.6s!important; }
+
+.font-farsi { font-family: "Noto Naskh Arabic", Tahoma, serif; font-feature-settings: "kern", "liga", "calt"; }
+.font-urdu { font-family: "Noto Naskh Arabic", Tahoma, serif; }
